@@ -79,17 +79,27 @@ section[id]{scroll-margin-top:calc(var(--header-h) + 8px)}
 /* ---------- header ---------- */
 .header{
   position:fixed;inset:0 0 auto 0;z-index:60;height:var(--header-h);
-  display:flex;align-items:center;border-bottom:1px solid transparent;
+  display:flex;align-items:center;
+  background:var(--bg);
+  border-bottom:1px solid transparent;
   transition:background var(--dur) var(--ease),border-color var(--dur) var(--ease);
 }
 .header.scrolled{
-  background:color-mix(in srgb,var(--bg) 82%,transparent);
-  backdrop-filter:saturate(180%) blur(14px);
-  -webkit-backdrop-filter:saturate(180%) blur(14px);
+  background:var(--bg);
+  backdrop-filter:none;
+  -webkit-backdrop-filter:none;
   border-bottom:1px solid var(--line);
 }
-.header__inner{display:flex;align-items:center;justify-content:space-between;gap:24px;width:100%;
-  max-width:var(--maxw);margin-inline:auto;padding-inline:var(--gutter)}
+.header__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 100%;
+  padding-left: clamp(20px, 4vw, 60px);
+  padding-right: clamp(20px, 4vw, 60px);
+  margin: 0 auto;
+}
 .brand{display:flex;align-items:center;gap:12px;position:relative;z-index:2}
 .brand__mark{width:38px;height:38px;color:var(--fg);flex:none}
 .brand__text{line-height:1.1}
@@ -164,20 +174,67 @@ section[id]{scroll-margin-top:calc(var(--header-h) + 8px)}
   transform:translateX(-100%);animation:sweep 2.4s var(--ease) infinite}
 @keyframes sweep{0%{transform:translateX(-100%)}55%{transform:translateX(100%)}100%{transform:translateX(100%)}}
 
-.hero__strip{display:grid;grid-template-columns:repeat(5,1fr);width:100%;position:relative;z-index:2}
-.hero__strip figure{position:relative;aspect-ratio:1/1.15;overflow:hidden;background:var(--bg-2)}
-.hero__strip img{width:100%;height:100%;object-fit:cover;transition:filter .5s;filter:saturate(.96)}
-.hero__strip figure:hover img{filter:saturate(1.06)}
+.hero__strip {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  width: 100%;
+  position: relative;
+  z-index: 2;
+  gap: 14px;                               /* зазор между карточками */
+  padding: 0 var(--gutter) 24px;          /* аккуратные отступы по бокам экрана и снизу */
+}
+
+.hero__strip figure {
+  position: relative;
+  aspect-ratio: 1 / 1.15;
+  overflow: hidden;
+  background: var(--bg-2);
+  border-radius: var(--radius);           /* стильное скругление углов в дизайне сайта */
+  box-shadow: 0 10px 30px -15px rgba(0, 0, 0, 0.2); /* мягкая глубина */
+}
+
+.hero__strip img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s var(--ease), filter 0.5s;
+  filter: saturate(0.96);
+}
+
+.hero__strip figure:hover img {
+  transform: scale(1.05);                 /* приятный зум при наведении */
+  filter: saturate(1.06);
+}
 
 /* ---------- marquee ---------- */
-.marquee{overflow:hidden;border-block:1px solid var(--line);padding:20px 0;background:var(--bg);
-  transition:background var(--dur) var(--ease)}
-.marquee__track{display:flex;width:max-content;animation:marquee 26s linear infinite}
+.marquee{
+  overflow: hidden;
+  border-block: none;                  /* удаляет сплошные верхнюю и нижнюю линии */
+  padding: 36px 0;                     /* дает воздуху дышать между фото и лентой */
+  background: var(--bg);
+  transition: background var(--dur) var(--ease);
+}
+.marquee__track{display:flex;width:max-content;animation:marquee 32s linear infinite}
 .marquee:hover .marquee__track{animation-play-state:paused}
 .marquee__row{display:flex;flex:none}
-.marquee__item{display:flex;align-items:center;font-size:clamp(1rem,2vw,1.4rem);font-weight:400;
-  letter-spacing:.14em;text-transform:uppercase;color:var(--fg-2);white-space:nowrap}
-.marquee__dot{margin:0 26px;color:var(--accent);font-size:.8em}
+.marquee__item{
+  display: flex;
+  align-items: center;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+  font-size: clamp(1.1rem, 2.2vw, 1.6rem);
+  font-weight: 700;                    /* насыщенный, уверенный шрифт */
+  letter-spacing: 0.28em;              /* премиальный широкий интервал */
+  text-transform: uppercase;
+  color: var(--fg);                    /* чистый глубокий цвет вместо блеклого серого */
+  opacity: 0.88;
+  white-space: nowrap;
+}
+.marquee__dot{
+  margin: 0 32px;
+  color: var(--accent);
+  font-size: 0.7em;
+  opacity: 0.6;
+}
 @keyframes marquee{to{transform:translateX(-50%)}}
 @media (prefers-reduced-motion:reduce){ .marquee__track{animation:none} }
 

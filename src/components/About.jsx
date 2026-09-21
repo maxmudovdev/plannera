@@ -2,16 +2,11 @@ import { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { useApp } from '../context/AppContext';
 import { CONFIG } from '../config';
-import { projects } from '../data/projects';
 import { Reveal, Counter, IcArrow } from './ui';
 
 export default function About() {
   const { t } = useApp();
   const mediaRef = useRef(null);
-
-  const aboutImg =
-    projects.find((p) => p.category === 'interior' && p.type === 'image') ||
-    projects.find((p) => p.type === 'image');
 
   // лёгкий параллакс фотографии
   const { scrollYProgress } = useScroll({ target: mediaRef, offset: ['start end', 'end start'] });
@@ -19,7 +14,6 @@ export default function About() {
 
   const facts = [
     ['fact.name', CONFIG.name],
-    ['fact.dob', CONFIG.birthday],
     ['fact.address', CONFIG.address],
     ['fact.email', <a key="e" href={`mailto:${CONFIG.contactEmail}`}>{CONFIG.contactEmail}</a>],
     ['fact.phone', <a key="p" href={`tel:${CONFIG.phone}`}>{CONFIG.phonePretty}</a>],
@@ -61,11 +55,12 @@ export default function About() {
 
           <Reveal delay={0.12} className="about__mediawrap">
             <div className="about__media" ref={mediaRef}>
-              {aboutImg && (
-                <motion.img src={aboutImg.src} alt="Interior visualization by Plannera"
-                  loading="lazy" style={{ y: imgY }} />
-              )}
-              <span className="word" aria-hidden="true">Interior</span>
+              <motion.img 
+                src="/author.jpg" 
+                alt={CONFIG.name}
+                loading="lazy" 
+                style={{ y: imgY }} 
+              />
             </div>
           </Reveal>
         </div>

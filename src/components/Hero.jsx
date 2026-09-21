@@ -32,13 +32,6 @@ export default function Hero({ ready }) {
           ))}
         </motion.h1>
 
-        <motion.p className="hero__tagline"
-          initial={{ opacity: 0, y: 22 }}
-          animate={ready ? { opacity: 1, y: 0 } : {}}
-          transition={{ delay: 0.75, duration: 0.7, ease: EASE }}>
-          {t('hero.tag1')} <b>{t('hero.tag2')}</b>
-        </motion.p>
-
         <motion.div className="hero__scroll"
           initial={{ opacity: 0 }}
           animate={ready ? { opacity: 1 } : {}}

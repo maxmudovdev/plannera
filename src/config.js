@@ -12,9 +12,9 @@ export const CONFIG = {
   contactEmail: 'plannera00@gmail.com',
   phone: '+998977577504',          // для ссылок tel: / wa.me
   phonePretty: '+998 97 757 75 04',// как показывать на сайте
-  telegram: 'Plannera_private',    // без @
-  instagram: 'plannera_company',   // без @
-  behance: 'https://www.behance.net/',
+  telegram: 'plannera_uz',    // без @
+  instagram: 'plannera.uz',   // без @
+  behance: 'https://www.behance.net/plannera',
 
   name: 'Akobir Azizov',
   birthday: '07.12.2004',
